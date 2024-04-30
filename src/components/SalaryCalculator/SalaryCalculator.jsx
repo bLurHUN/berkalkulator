@@ -7,8 +7,31 @@ import {Trash} from "react-bootstrap-icons";
 import {useState} from "react";
 
 const SalaryCalculator = () => {
-  const [name, setName] = useState("Bendi");
-  const [gross, setGross] = useState("500000")
+  const [name, setName] = useState("Bendi")
+  const [gross, setGross] = useState(500000)
+  const [net, setNet] = useState(332500)
+  const [szja, setSzja] = useState(false)
+
+  function handleGrossInput(e) {
+    setGross(e)
+  }
+
+  function toggleSZJA(checked) {
+    setSzja(checked)
+    setNet(() => {
+      if (checked) {
+        if (gross > 499952) {
+          let calc = gross - 499952
+          calc -= calc * 0.15
+          return 499952 + calc
+        } else {
+          return gross
+        }
+      } else {
+        return gross * 0.665
+      }
+    })
+  }
 
   return (
     <>
@@ -31,7 +54,7 @@ const SalaryCalculator = () => {
                 <Form.Control
                   placeholder={gross + " Ft"}
                   value={gross}
-                  onChange={e => setGross(e.target.value)}
+                  onChange={e => handleGrossInput(e.target.value)}
                   type={"number"}
                 />
                 <InputGroup.Text>Ft</InputGroup.Text>
@@ -39,22 +62,27 @@ const SalaryCalculator = () => {
               <Form.Text className={"text-muted"}>Add meg a bruttó béredet!</Form.Text>
               <Form.Range
                 value={gross / 10000}
-                onChange={e => setGross(e.target.value * 10000)}
+                onChange={e => handleGrossInput(e.target.value * 10000)}
               />
               <div className={"d-flex justify-content-center"}>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => setGross(Number(gross) - 10000)}>-1%</Button>
+                        onClick={() => handleGrossInput(Number(gross) - 10000)}>-1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => setGross(Number(gross) - 50000)}>-5%</Button>
+                        onClick={() => handleGrossInput(Number(gross) - 50000)}>-5%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => setGross(Number(gross) + 10000)}>+1%</Button>
+                        onClick={() => handleGrossInput(Number(gross) + 10000)}>+1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => setGross(Number(gross) + 50000)}>+5%</Button>
+                        onClick={() => handleGrossInput(Number(gross) + 50000)}>+5%</Button>
               </div>
             </Form.Group>
             <h3>Kedvezmények</h3>
             <Form.Group className={"sm-2"} controlId={"calculatorForm.Discounts"}>
-              <Form.Check type={"switch"} id={"szja"} label={"25 év alattiak SZJA mentessége"}/>
+              <Form.Check
+                type={"switch"}
+                id={"szja"}
+                label={"25 év alattiak SZJA mentessége"}
+                onChange={e => toggleSZJA(e.target.checked)}
+              />
               <Form.Check type={"switch"} id={"married"} label={"Friss házasok kedvezménye"}/>
               <Form.Check type={"switch"} id={"personal"} label={"Személyi adókedvezmény"}/>
               <Form.Check type={"switch"} id={"family"} label={"Családi kedvezmény"}/>
@@ -69,7 +97,7 @@ const SalaryCalculator = () => {
         <Col className={"text-center"}>
           <p>Számított nettó bér:</p>
           <div>
-            <p>100.000 Ft</p>
+            <p>{net} Ft</p>
           </div>
         </Col>
       </Row>
