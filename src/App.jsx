@@ -1,12 +1,10 @@
 import HouseholdSalaryCalculator from "./components/HouseholdSalaryCalculator";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (
-    <div>
-      <h1>Bérkalkulátor alkalmazás</h1>
-      <HouseholdSalaryCalculator />
-    </div>
-  );
+    return (
+        <HouseholdSalaryCalculator/>
+    );
 }
 
 export default App;
