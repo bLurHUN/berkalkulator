@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import {Trash} from "react-bootstrap-icons";
 import {useState} from "react";
 import Family from "./components/Family.jsx";
+import Name from "./components/Name.jsx";
 
 const SalaryCalculator = (props) => {
   const [name, setName] = useState(props.name)
@@ -92,13 +93,7 @@ const SalaryCalculator = (props) => {
           <Form>
             <h1>{name} bérének számítása</h1>
             <Form.Group className={"sm-2"} controlId={"calculatorForm.Name"}>
-              <Form.Label>Családtag neve</Form.Label>
-              <Form.Control
-                type={"text"}
-                placeholder={name}
-                onChange={e => handleName(e.target.value)}
-              />
-              <Form.Text className={"text-muted"}>Add meg a családtag nevét!</Form.Text>
+              <Name name={name} handleName={handleName}/>
             </Form.Group>
             <Form.Group className={"sm-2"} controlId={"calculatorForm.Salary"}>
               <Form.Label>Bruttó bér</Form.Label>
