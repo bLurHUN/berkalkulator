@@ -46,9 +46,9 @@ Tehát léteznek a következő komponensek:
   -[ ] Személyek mentése: Az elmentett személyek táblázatban megjelennek a nettó jövedelmükkel.  (2pt)
   -[ ] Személyek mentése: Az elmentett személyek alapján az alkalmazás kiszámolja a háztartás nettó jövedelmét, és ezt is megjeleníti (1pt)
   -[ ] Személyek módosítása: A személyek listájában egy személyre kattintva megjelenik a nettó és bruttó bére a Bérkalkulátorban, és a nevét tudjuk módosítani.  (4pt)
-  -[ ] Személyek módosítása: A személyhez tartozó minden adat megjelenik a Bérkalkulátorban, és ezeket módosítva felül tudjuk írni az eredeti személy adatait. (2pt)
-  -[ ] Személyek törlése:A személyeket a listából lehet törölni (1pt)
--[ ] Igényes megjelenés (2pt)
+  -[x] Személyek módosítása: A személyhez tartozó minden adat megjelenik a Bérkalkulátorban, és ezeket módosítva felül tudjuk írni az eredeti személy adatait. (2pt)
+  -[x] Személyek törlése: A személyeket a listából lehet törölni (1pt)
+-[x] Igényes megjelenés (2pt)
 
 - Plusz pontok:
   -[ ] LocalStorage: A háztartásban élő személyeket, és a hozzájuk tartozó adatokat LocalStorage-ba mentjük. Ha ide el van mentve már egy háztartáshoz tartozó adatcsomag, az ő adataikkal fog az alkalmazásunk megjelenni. Ehhez készíts egy saját Hook-ot, amivel a LocalStorage-ba el tudod menteni az értékeket. (3 pont)

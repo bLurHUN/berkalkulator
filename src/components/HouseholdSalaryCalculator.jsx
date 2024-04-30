@@ -21,6 +21,12 @@ const HouseholdSalaryCalculator = () => {
     setMembers(updated)
   }
 
+  function deleteMember(id) {
+    setMembers(
+      members.filter(a => a.id !== id)
+    );
+  }
+
   function newMember(e) {
     e.preventDefault()
 
@@ -44,10 +50,10 @@ const HouseholdSalaryCalculator = () => {
       <main>
         { members.map(m => {
           if (active === m.id) {
-            return (<SalaryCalculator key={m.id} modMember={modMember} id={m.id} name={m.name} gross={m.gross} net={m.net} szja={m.szja} married={m.married} />)
+            return (<SalaryCalculator key={m.id} modMember={modMember} deleteMember={deleteMember} id={m.id} name={m.name} gross={m.gross} net={m.net} szja={m.szja} married={m.married} />)
           }
         }) }
-        <HouseholdSummary />
+        {/*<HouseholdSummary />*/}
       </main>
     </Container>
   );

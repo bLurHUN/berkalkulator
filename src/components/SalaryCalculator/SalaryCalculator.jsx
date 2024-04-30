@@ -151,7 +151,7 @@ const SalaryCalculator = (props) => {
           </Form>
         </Col>
         <Col className={"text-end"}>
-          <Button variant={"danger"}><Trash/></Button>
+          <Button variant={"danger"} onClick={() => props.deleteMember(props.id)}><Trash/></Button>
         </Col>
       </Row>
       <Row>
