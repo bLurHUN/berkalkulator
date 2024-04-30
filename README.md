@@ -42,7 +42,7 @@ Tehát léteznek a következő komponensek:
   -[ ] Egyedi beviteli komponens: A kedvezményezett és nem kedvezményezett eltartottak számát meg tudjuk adni, és ezek alapján a nettó bér jól változik. Ez a pont akkor is jár, ha ez a mező csak egy sima szöveges beviteli mező. A kedvezményezett eltartottak száma nem lehet több az eltartottak számánál, és nem lehet nagyobb, mint 3. (2pt)
   -[x] Egyedi beviteli komponens: Az egyedi beviteli komponenssel - és + gombok segítségével tudjuk változtatni a hozzá tartozó szám értékét. (2pt)
 - Háztartás jövedelme
-  -[ ] Személyek mentése: Az elkészített bérkalkulációt automatikusan elmentődik az alkalmazás állapotterében a megfelelő névvel, és a hozzá tartozó értékekkel. (2 pont)
+  -[x] Személyek mentése: Az elkészített bérkalkulációt automatikusan elmentődik az alkalmazás állapotterében a megfelelő névvel, és a hozzá tartozó értékekkel. (2 pont)
   -[ ] Személyek mentése: Az elmentett személyek táblázatban megjelennek a nettó jövedelmükkel.  (2pt)
   -[ ] Személyek mentése: Az elmentett személyek alapján az alkalmazás kiszámolja a háztartás nettó jövedelmét, és ezt is megjeleníti (1pt)
   -[ ] Személyek módosítása: A személyek listájában egy személyre kattintva megjelenik a nettó és bruttó bére a Bérkalkulátorban, és a nevét tudjuk módosítani.  (4pt)

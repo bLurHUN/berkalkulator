@@ -7,14 +7,19 @@ import {Trash} from "react-bootstrap-icons";
 import {useState} from "react";
 import Family from "./components/Family.jsx";
 
-const SalaryCalculator = () => {
-  const [name, setName] = useState("Bendi")
-  const [gross, setGross] = useState(500000)
-  const [net, setNet] = useState(332500)
-  const [szja, setSzja] = useState(false)
-  const [married, setMarried] = useState(false)
+const SalaryCalculator = (props) => {
+  const [name, setName] = useState(props.name)
+  const [gross, setGross] = useState(props.gross)
+  const [net, setNet] = useState(props.net)
+  const [szja, setSzja] = useState(props.szja)
+  const [married, setMarried] = useState(props.married)
 
-  function handleInput(value) {
+  function handleName(value) {
+    setName(value)
+    props.modMember(props.id, value, gross, net, szja, married)
+  }
+
+  function handleGross(value) {
     setGross(value)
 
     let m = 0
@@ -26,13 +31,17 @@ const SalaryCalculator = () => {
       if (value > 499952) {
         let calc = value - 499952
         calc -= calc * 0.15
+        props.modMember(props.id, name, value, 499952 + calc + m, szja, married)
         setNet(499952 + calc + m)
       } else {
+        props.modMember(props.id, name, value, value + m, szja, married)
         setNet(value + m)
       }
     } else {
+      props.modMember(props.id, name, value, (value * 0.665) + m, szja, married)
       setNet((value * 0.665) + m)
     }
+
   }
 
   function handleSZJA(checked) {
@@ -48,11 +57,14 @@ const SalaryCalculator = () => {
         if (gross > 499952) {
           let calc = gross - 499952
           calc -= calc * 0.15
+          props.modMember(props.id, name, gross, 499952 + calc + m, checked, married)
           return 499952 + calc + m
         } else {
+          props.modMember(props.id, name, gross, gross + m, checked, married)
           return gross + m
         }
       } else {
+        props.modMember(props.id, name, gross, (gross * 0.665) + m, checked, married)
         return (gross * 0.665) + m
       }
     })
@@ -60,10 +72,13 @@ const SalaryCalculator = () => {
 
   function handleMarried(checked) {
     setMarried(checked)
+
     setNet(n => {
       if (checked) {
+        props.modMember(props.id, name, gross, n+5000, szja, checked)
         return n + 5000
       } else if (married) {
+        props.modMember(props.id, name, gross, n-5000, szja, checked)
         return n - 5000
       }
     })
@@ -80,7 +95,7 @@ const SalaryCalculator = () => {
               <Form.Control
                 type={"text"}
                 placeholder={name}
-                onChange={e => setName(e.target.value)}
+                onChange={e => handleName(e.target.value)}
               />
               <Form.Text className={"text-muted"}>Add meg a családtag nevét!</Form.Text>
             </Form.Group>
@@ -90,7 +105,7 @@ const SalaryCalculator = () => {
                 <Form.Control
                   placeholder={gross + " Ft"}
                   value={gross}
-                  onChange={e => handleInput(e.target.value)}
+                  onChange={e => handleGross(e.target.value)}
                   type={"number"}
                 />
                 <InputGroup.Text>Ft</InputGroup.Text>
@@ -98,17 +113,17 @@ const SalaryCalculator = () => {
               <Form.Text className={"text-muted"}>Add meg a bruttó béredet!</Form.Text>
               <Form.Range
                 value={gross / 10000}
-                onChange={e => handleInput(e.target.value * 10000)}
+                onChange={e => handleGross(e.target.value * 10000)}
               />
               <div className={"d-flex justify-content-center"}>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleInput(Number(gross) - 10000)}>-1%</Button>
+                        onClick={() => handleGross(Number(gross) - 10000)}>-1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleInput(Number(gross) - 50000)}>-5%</Button>
+                        onClick={() => handleGross(Number(gross) - 50000)}>-5%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleInput(Number(gross) + 10000)}>+1%</Button>
+                        onClick={() => handleGross(Number(gross) + 10000)}>+1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleInput(Number(gross) + 50000)}>+5%</Button>
+                        onClick={() => handleGross(Number(gross) + 50000)}>+5%</Button>
               </div>
             </Form.Group>
             <h3>Kedvezmények</h3>
@@ -117,12 +132,14 @@ const SalaryCalculator = () => {
                 type={"switch"}
                 id={"szja"}
                 label={"25 év alattiak SZJA mentessége"}
+                checked={szja}
                 onChange={e => handleSZJA(e.target.checked)}
               />
               <Form.Check
                 type={"switch"}
                 id={"married"}
                 label={"Friss házasok kedvezménye"}
+                checked={married}
                 onChange={e => handleMarried(e.target.checked)}
               />
               <Form.Check type={"switch"} id={"personal"} label={"Személyi adókedvezmény"}/>
