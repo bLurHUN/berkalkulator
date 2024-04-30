@@ -1,5 +1,7 @@
 import './style.css'
 import {useState} from "react";
+import Button from "react-bootstrap/Button";
+import {ButtonGroup} from "react-bootstrap";
 
 const Family = () => {
   const [dep, setDep] = useState(3)
@@ -32,13 +34,17 @@ const Family = () => {
 
   return (
     <>
-      <button onClick={e => handleClick(e, true, -1)}>-</button>
-      {dep}
-      <button onClick={e => handleClick(e, true, 1)}>+</button>
-      eltartott, ebből kedvezményezett:
-      <button onClick={e => handleClick(e, false, -1)}>-</button>
-      {dis}
-      <button onClick={e => handleClick(e, false, 1)}>+</button>
+      <ButtonGroup size={"sm"}>
+        <Button onClick={e => handleClick(e, true, -1)}>-</Button>
+        <Button disabled={true}>{dep}</Button>
+        <Button onClick={e => handleClick(e, true, 1)}>+</Button>
+      </ButtonGroup>
+        eltartott, ebből kedvezményezett:
+      <ButtonGroup size={"sm"}>
+        <Button onClick={e => handleClick(e, false, -1)}>-</Button>
+        <Button disabled={true}>{dis}</Button>
+        <Button onClick={e => handleClick(e, false, 1)}>+</Button>
+      </ButtonGroup>
     </>
   )
 }

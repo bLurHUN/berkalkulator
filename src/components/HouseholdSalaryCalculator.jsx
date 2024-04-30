@@ -1,5 +1,5 @@
 import FamilyMemberTabs from "./FamilyMemberTabs/FamilyMemberTabs";
-import HouseholdSummary from "./HouseholdSummary/HouseholdSummary";
+// import HouseholdSummary from "./HouseholdSummary/HouseholdSummary";
 import SalaryCalculator from "./SalaryCalculator/SalaryCalculator";
 import {useState} from "react";
 import Container from "react-bootstrap/Container";

@@ -113,13 +113,13 @@ const SalaryCalculator = (props) => {
               />
               <div className={"d-flex justify-content-center"}>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleGross(Number(gross) - 10000)}>-1%</Button>
+                        onClick={() => handleGross(Number(gross) - Number(gross)*0.01)}>-1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleGross(Number(gross) - 50000)}>-5%</Button>
+                        onClick={() => handleGross(Number(gross) - Number(gross)*0.05)}>-5%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleGross(Number(gross) + 10000)}>+1%</Button>
+                        onClick={() => handleGross(Number(gross) + Number(gross)*0.01)}>+1%</Button>
                 <Button className={"mx-2 col-1"}
-                        onClick={() => handleGross(Number(gross) + 50000)}>+5%</Button>
+                        onClick={() => handleGross(Number(gross) + Number(gross)*0.05)}>+5%</Button>
               </div>
             </Form.Group>
             <h3>Kedvezmények</h3>
