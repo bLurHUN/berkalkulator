@@ -13,7 +13,14 @@ const Family = () => {
         setDep(p => {
           return p + v
         })
+
+        if (dep + v < dis) {
+          setDis(p => {
+            return p - 1
+          })
+        }
       }
+
     } else {
       if (dis + v <= dep && dis + v >= 1) {
         setDis(p => {

@@ -11,37 +11,60 @@ const SalaryCalculator = () => {
   const [name, setName] = useState("Bendi")
   const [gross, setGross] = useState(500000)
   const [net, setNet] = useState(332500)
-
   const [szja, setSzja] = useState(false)
+  const [married, setMarried] = useState(false)
 
   function handleInput(value) {
     setGross(value)
+
+    let m = 0
+    if (married) {
+      m = 5000
+    }
+
     if (szja) {
       if (value > 499952) {
         let calc = value - 499952
         calc -= calc * 0.15
-        setNet(499952 + calc)
+        setNet(499952 + calc + m)
       } else {
-        setNet(value)
+        setNet(value + m)
       }
     } else {
-      setNet(value * 0.665)
+      setNet((value * 0.665) + m)
     }
   }
 
   function handleSZJA(checked) {
     setSzja(checked)
+
+    let m = 0
+    if (married) {
+      m = 5000
+    }
+
     setNet(() => {
       if (checked) {
         if (gross > 499952) {
           let calc = gross - 499952
           calc -= calc * 0.15
-          return 499952 + calc
+          return 499952 + calc + m
         } else {
-          return gross
+          return gross + m
         }
       } else {
-        return gross * 0.665
+        return (gross * 0.665) + m
+      }
+    })
+  }
+
+  function handleMarried(checked) {
+    setMarried(checked)
+    setNet(n => {
+      if (checked) {
+        return n + 5000
+      } else if (married) {
+        return n - 5000
       }
     })
   }
@@ -96,7 +119,12 @@ const SalaryCalculator = () => {
                 label={"25 év alattiak SZJA mentessége"}
                 onChange={e => handleSZJA(e.target.checked)}
               />
-              <Form.Check type={"switch"} id={"married"} label={"Friss házasok kedvezménye"}/>
+              <Form.Check
+                type={"switch"}
+                id={"married"}
+                label={"Friss házasok kedvezménye"}
+                onChange={e => handleMarried(e.target.checked)}
+              />
               <Form.Check type={"switch"} id={"personal"} label={"Személyi adókedvezmény"}/>
               <Form.Check type={"switch"} id={"family"} label={"Családi kedvezmény"}/>
               <Form.Text>
